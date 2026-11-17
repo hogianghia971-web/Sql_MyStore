@@ -1,0 +1,557 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASTOR - Thiết Bị Văn Phòng & Công Nghệ</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#ff5e15',
+                            dark: '#2d2d2d',
+                            blue: '#00a8ff',
+                            yellow: '#ffd32a',
+                            cyan: '#0fbcf9',
+                            graybg: '#f8f9fa'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+            .section-title::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 2px;
+                background-color: #d1d5db;
+            }
+
+        .cat-block {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .cat-block:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+                z-index: 10;
+            }
+
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff5e15;
+            border-radius: 4px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #e04e0e;
+            }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-white flex flex-col min-h-screen">
+
+    <!-- Top Contact Bar -->
+    <div class="bg-gray-100 text-gray-500 text-xs py-2 border-b border-gray-200 hidden md:block">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div><i class="fas fa-truck mr-1"></i> Miễn phí vận chuyển & Hoàn trả</div>
+            <div class="flex space-x-6">
+                <span><i class="fas fa-shield-alt mr-1"></i> Đảm bảo hoàn tiền</span>
+                <span><i class="fas fa-headset mr-1"></i> Hỗ trợ 24/7</span>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-between items-center py-4 md:h-24">
+                <!-- Logo -->
+                <div class="w-full md:w-auto flex justify-between items-center mb-4 md:mb-0">
+                    <a href="#" class="text-4xl font-extrabold tracking-widest text-black uppercase">Fastor</a>
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden text-gray-600 hover:text-brand-orange focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="w-full md:w-1/2 flex-1 md:px-8 mb-4 md:mb-0 order-last md:order-none">
+                    <form onsubmit="event.preventDefault();" class="flex border-2 border-brand-orange rounded-full overflow-hidden">
+                        <input type="text" class="flex-1 px-4 py-2 text-sm focus:outline-none" placeholder="Tìm kiếm sản phẩm, danh mục...">
+                        <button type="submit" class="bg-brand-orange text-white px-6 py-2 hover:bg-orange-600 transition">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info & Cart -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="flex items-center text-gray-600">
+                        <i class="fas fa-phone-alt text-brand-orange text-2xl mr-3"></i>
+                        <div class="leading-tight">
+                            <span class="block text-xs uppercase font-bold text-gray-400">Gọi cho chúng tôi</span>
+                            <span class="block font-bold text-lg text-black">500-130-120</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4 border-l pl-6">
+                        <a href="#" class="text-gray-600 hover:text-brand-orange transition"><i class="fas fa-user text-xl"></i></a>
+                        <a href="#" class="relative p-2 text-gray-600 hover:text-brand-orange transition group">
+                            <i class="fas fa-shopping-basket text-2xl group-hover:scale-110 transition-transform"></i>
+                            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-orange rounded-full">3</span>
+                        </a>
+                        <span class="font-bold text-gray-800">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orange Navigation Bar -->
+        <div class="bg-brand-orange hidden md:block">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <ul class="flex flex-wrap space-x-8 py-3 text-sm font-semibold text-white uppercase tracking-wider">
+                    <li><a href="#" class="hover:text-yellow-200 transition">Trang chủ</a></li>
+                    <li><a href="#" class="hover:text-yellow-200 transition text-yellow-200">Sản phẩm</a></li>
+                    <li><a href="#" class="hover:text-yellow-200 transition flex items-center">Công nghệ <i class="fas fa-angle-down ml-1"></i></a></li>
+                    <li><a href="#" class="hover:text-yellow-200 transition flex items-center">Nội thất <i class="fas fa-angle-down ml-1"></i></a></li>
+                    <li><a href="#" class="hover:text-yellow-200 transition">Văn phòng phẩm</a></li>
+                    <li><a href="#" class="hover:text-yellow-200 transition">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative bg-gray-900 h-[400px] md:h-[550px] flex items-center justify-center text-center text-white">
+        <!-- Unsplash Office Background -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80" alt="Office Background" class="w-full h-full object-cover opacity-60">
+        </div>
+
+        <div class="relative z-10 px-4 max-w-4xl">
+            <h4 class="text-xl md:text-2xl font-light mb-2 tracking-wider">Equipment you need</h4>
+            <h2 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight tracking-tight shadow-sm">For your new <br /> office</h2>
+            <a href="#" class="inline-block bg-brand-cyan hover:bg-blue-500 text-white px-10 py-4 text-sm font-bold uppercase tracking-widest rounded-sm transition transform hover:-translate-y-1 shadow-lg">READ MORE</a>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-10 relative z-20">
+        <!-- Exact FASTOR Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[450px]">
+
+            <!-- Block 1: Blue (Col 1, Span 2 rows) -->
+            <a href="#" class="cat-block bg-brand-blue rounded shadow-md p-6 flex flex-col justify-between md:col-span-1 md:row-span-2 relative overflow-hidden group min-h-[200px]">
+                <div class="z-10 relative">
+                    <h3 class="text-white text-xl font-bold mb-2">Paper<br>& Mailing</h3>
+                    <i class="fas fa-chevron-right text-white text-sm opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                </div>
+                <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=300&q=80" class="absolute -bottom-10 -right-10 w-48 opacity-90 group-hover:scale-110 transition duration-500" alt="Paper">
+            </a>
+
+            <!-- Block 2: Yellow (Col 2 & 3, Row 1) -->
+            <a href="#" class="cat-block bg-brand-yellow rounded shadow-md p-6 flex flex-col justify-center md:col-span-2 md:row-span-1 relative overflow-hidden group min-h-[200px]">
+                <div class="z-10 relative w-1/2">
+                    <h3 class="text-gray-900 text-xl font-bold mb-2">Furniture</h3>
+                    <i class="fas fa-chevron-right text-gray-900 text-sm opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                </div>
+                <img src="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=400&q=80" class="absolute top-1/2 -translate-y-1/2 -right-4 w-56 object-cover rounded drop-shadow-xl group-hover:scale-105 transition duration-500" alt="Furniture">
+            </a>
+
+            <!-- Block 3: Dark (Col 4, Row 1) -->
+            <a href="#" class="cat-block bg-brand-dark rounded shadow-md p-6 flex flex-col justify-between md:col-span-1 md:row-span-1 relative overflow-hidden group min-h-[200px]">
+                <div class="z-10 relative">
+                    <h3 class="text-white text-xl font-bold mb-2">Organization</h3>
+                    <i class="fas fa-chevron-right text-white text-sm opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                </div>
+                <img src="https://images.unsplash.com/photo-1557800636-8ab37049886a?w=300&q=80" class="absolute bottom-0 right-0 w-32 opacity-80 group-hover:translate-y-2 transition duration-500" alt="Folders">
+            </a>
+
+            <!-- Block 4: Orange (Col 2 & 3, Row 2) -->
+            <a href="#" class="cat-block bg-brand-orange rounded shadow-md p-6 flex flex-col justify-center md:col-span-2 md:row-span-1 relative overflow-hidden group min-h-[200px]">
+                <div class="z-10 relative w-1/2">
+                    <h3 class="text-white text-xl font-bold mb-2">Writing</h3>
+                    <i class="fas fa-chevron-right text-white text-sm opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                </div>
+                <img src="https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=400&q=80" class="absolute top-1/2 -translate-y-1/2 right-4 w-40 object-cover transform rotate-12 drop-shadow-xl group-hover:rotate-0 transition duration-500" alt="Writing">
+            </a>
+
+            <!-- Block 5: Cyan (Col 4, Row 2) -->
+            <a href="#" class="cat-block bg-brand-cyan rounded shadow-md p-6 flex flex-col justify-between md:col-span-1 md:row-span-1 relative overflow-hidden group min-h-[200px]">
+                <div class="z-10 relative">
+                    <h3 class="text-white text-xl font-bold mb-2">Cleaning</h3>
+                    <i class="fas fa-chevron-right text-white text-sm opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                </div>
+                <img src="https://images.unsplash.com/photo-1584820927498-cafe5c1562ae?w=300&q=80" class="absolute -bottom-4 -right-4 w-36 opacity-90 drop-shadow-lg group-hover:-translate-x-2 transition duration-500" alt="Cleaning">
+            </a>
+
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-extrabold text-gray-800 section-title uppercase tracking-wide">Sản phẩm nổi bật</h2>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
+            <!-- Product 1 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?w=400&q=80" alt="Apple Cinema 30" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-gray-800 text-white w-10 h-10 rounded-full mx-1 hover:bg-brand-orange shadow transition"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="bg-gray-200 text-gray-800 w-10 h-10 rounded-full mx-1 hover:bg-gray-300 shadow transition"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Apple Cinema 30"</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-gray-400 line-through text-xs">$122.00</span>
+                        <span class="text-brand-orange font-bold">$110.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&q=80" alt="Canon EOS 5D" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-gray-800 text-white w-10 h-10 rounded-full mx-1 hover:bg-brand-orange shadow transition"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="bg-gray-200 text-gray-800 w-10 h-10 rounded-full mx-1 hover:bg-gray-300 shadow transition"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Canon EOS 5D</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-gray-400 line-through text-xs">$122.00</span>
+                        <span class="text-brand-orange font-bold">$98.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&q=80" alt="HP LP3065" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-gray-800 text-white w-10 h-10 rounded-full mx-1 hover:bg-brand-orange shadow transition"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="bg-gray-200 text-gray-800 w-10 h-10 rounded-full mx-1 hover:bg-gray-300 shadow transition"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">HP LP3065</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$122.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&q=80" alt="HTC Touch HD" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute top-2 left-2 bg-brand-cyan text-white text-xs px-2 py-1 rounded">NEW</div>
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-gray-800 text-white w-10 h-10 rounded-full mx-1 hover:bg-brand-orange shadow transition"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="bg-gray-200 text-gray-800 w-10 h-10 rounded-full mx-1 hover:bg-gray-300 shadow transition"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">HTC Touch HD</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$122.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?w=400&q=80" alt="iMac" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-gray-800 text-white w-10 h-10 rounded-full mx-1 hover:bg-brand-orange shadow transition"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="bg-gray-200 text-gray-800 w-10 h-10 rounded-full mx-1 hover:bg-gray-300 shadow transition"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">iMac 24-inch</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$122.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80" alt="MacBook" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-gray-800 text-white w-10 h-10 rounded-full mx-1 hover:bg-brand-orange shadow transition"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="bg-gray-200 text-gray-800 w-10 h-10 rounded-full mx-1 hover:bg-gray-300 shadow transition"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">MacBook Pro M2</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$602.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&q=80" alt="Logitech Keyboard" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-gray-800 text-white w-10 h-10 rounded-full mx-1 hover:bg-brand-orange shadow transition"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="bg-gray-200 text-gray-800 w-10 h-10 rounded-full mx-1 hover:bg-gray-300 shadow transition"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Bàn phím cơ Logitech</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$150.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80" alt="Razer Mouse" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">SALE</div>
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-gray-800 text-white w-10 h-10 rounded-full mx-1 hover:bg-brand-orange shadow transition"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="bg-gray-200 text-gray-800 w-10 h-10 rounded-full mx-1 hover:bg-gray-300 shadow transition"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Chuột Razer Gaming</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-gray-400 line-through text-xs">$95.00</span>
+                        <span class="text-brand-orange font-bold">$80.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mb-16 border-t border-gray-100 pt-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-extrabold text-gray-800 section-title uppercase tracking-wide">Danh sách sản phẩm</h2>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
+
+            <!-- Product 9 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80" alt="Dell Monitor" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-brand-orange text-white w-full mx-4 py-2 text-sm font-bold rounded uppercase hover:bg-orange-600 transition shadow">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Màn hình Dell UltraSharp</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$350.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 10 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=400&q=80" alt="Ergonomic Desk" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-brand-orange text-white w-full mx-4 py-2 text-sm font-bold rounded uppercase hover:bg-orange-600 transition shadow">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Bàn làm việc Ergonomic</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-gray-400 line-through text-xs">$350.00</span>
+                        <span class="text-brand-orange font-bold">$299.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 11 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=400&q=80" alt="Office Chair" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-brand-orange text-white w-full mx-4 py-2 text-sm font-bold rounded uppercase hover:bg-orange-600 transition shadow">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Ghế văn phòng cao cấp</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$199.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 12 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&q=80" alt="Sony Headphones" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute top-2 left-2 bg-brand-orange text-white text-xs px-2 py-1 rounded">HOT</div>
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-brand-orange text-white w-full mx-4 py-2 text-sm font-bold rounded uppercase hover:bg-orange-600 transition shadow">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Tai nghe Sony chống ồn</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$250.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 13 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400&q=80" alt="HP Printer" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-brand-orange text-white w-full mx-4 py-2 text-sm font-bold rounded uppercase hover:bg-orange-600 transition shadow">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Máy in HP LaserJet</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$180.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 14 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1583485088034-697b5a650dd9?w=400&q=80" alt="Parker Pen" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-brand-orange text-white w-full mx-4 py-2 text-sm font-bold rounded uppercase hover:bg-orange-600 transition shadow">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Bút ký cao cấp Parker</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$45.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 15 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1621245642635-f9328a9be1c4?w=400&q=80" alt="Document Organizer" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-brand-orange text-white w-full mx-4 py-2 text-sm font-bold rounded uppercase hover:bg-orange-600 transition shadow">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Kẹp tài liệu đa năng</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-gray-400 line-through text-xs">$20.00</span>
+                        <span class="text-brand-orange font-bold">$15.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 16 -->
+            <div class="group flex flex-col">
+                <div class="relative bg-white p-4 mb-4 flex items-center justify-center h-48 sm:h-56 transition-all hover:shadow-xl border border-gray-100 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&q=80" alt="Backpack" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-brand-orange text-white w-full mx-4 py-2 text-sm font-bold rounded uppercase hover:bg-orange-600 transition shadow">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="text-center mt-auto">
+                    <h3 class="text-sm font-semibold text-gray-700 hover:text-brand-orange cursor-pointer mb-1">Balo chống sốc Laptop</h3>
+                    <div class="flex justify-center items-center space-x-2">
+                        <span class="text-brand-orange font-bold">$65.00</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark text-white pt-12 pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Về Fastor</h3>
+                    <p class="text-gray-400 leading-relaxed">Fastor cung cấp giải pháp toàn diện cho văn phòng của bạn với các thiết bị công nghệ, nội thất và văn phòng phẩm chất lượng cao.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Thông tin</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><a href="#" class="hover:text-brand-orange transition">Về chúng tôi</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Dịch vụ</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><a href="#" class="hover:text-brand-orange transition">Giao hàng</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Đổi trả hàng</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Hỗ trợ khách hàng</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Kết nối</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded flex items-center justify-center hover:bg-brand-orange transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded flex items-center justify-center hover:bg-brand-orange transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded flex items-center justify-center hover:bg-brand-orange transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-500 text-xs">
+                &copy; 2026 FASTOR. All Rights Reserved. Designed according to requirements.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

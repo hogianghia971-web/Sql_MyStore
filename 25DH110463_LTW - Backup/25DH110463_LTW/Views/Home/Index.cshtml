@@ -1,0 +1,197 @@
+﻿@model _25DH110463_LTW.Models.ViewModel.HomeProductVM
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Thêm CSS hỗ trợ cho thanh phân trang -->
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    /* CSS CHO BANNER LỚN TRAN MÀN HÌNH */
+    .banner {
+        background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070');
+        background-size: cover; /* Phủ kín khung[cite: 38] */
+        background-position: center; /* Canh giữa ảnh[cite: 38] */
+        height: 500px; /* Chiều cao banner[cite: 38] */
+        display: flex; /* Dùng flexbox[cite: 38] */
+        align-items: center; /* Căn giữa dọc[cite: 38] */
+        justify-content: center; /* Căn giữa ngang[cite: 38] */
+        margin-bottom: 40px;
+    }
+
+    .banner-content {
+        text-align: center; /* Chữ canh giữa[cite: 38] */
+        color: #fff; /* Chữ trắng[cite: 38] */
+    }
+
+        .banner-content h2 {
+            font-size: 50px; /* Chữ lớn[cite: 38] */
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px; /* Khoảng cách dưới[cite: 38] */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .banner-content p {
+            font-size: 22px; /* Cỡ chữ[cite: 38] */
+            margin-bottom: 30px; /* Khoảng cách dưới[cite: 38] */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+    .btn-banner {
+        display: inline-block; /* Hiển thị khối[cite: 38] */
+        padding: 12px 30px; /* Khoảng cách trong[cite: 38] */
+        background-color: #00bcd4; /* Nền xanh lục[cite: 38] (Màu gốc FASTOR) */
+        color: #fff !important; /* Chữ trắng[cite: 38] */
+        text-decoration: none; /* Không gạch chân[cite: 38] */
+        font-weight: bold; /* In đậm[cite: 38] */
+        text-transform: uppercase;
+    }
+
+    /* CSS CHO LƯỚI DANH MỤC CATEGORY */
+    .cat-box {
+        height: 200px;
+        padding: 20px;
+        color: white;
+        font-weight: bold;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cat-blue {
+        background-color: #00bcd4;
+    }
+
+    .cat-yellow {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+    .cat-dark {
+        background-color: #333;
+    }
+
+    .cat-orange {
+        background-color: #ff7f00;
+    }
+
+    /* CSS CHO DANH SÁCH SẢN PHẨM NỔI BẬT */
+    .featured-products {
+        text-align: center;
+        margin-top: 50px;
+    }
+        /* Căn giữa[cite: 41] */
+        .featured-products h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+    /* Tiêu đề[cite: 41] */
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+    /* Flexbox bọc sản phẩm[cite: 41] */
+    .product-item {
+        width: 220px;
+        text-align: center;
+    }
+        /* Kích thước từng món[cite: 41] */
+        .product-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        /* Hình ảnh[cite: 41] */
+        .product-item h3 {
+            font-size: 14px;
+            margin: 10px 0;
+            color: #666;
+            font-weight: normal;
+        }
+        /* Tên sản phẩm[cite: 41] */
+        .product-item .price {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 16px;
+        }
+    /* Giá tiền[cite: 41] */
+</style>
+
+<!-- KHU VỰC BANNER -->
+<section class="banner">
+    <!-- Thẻ bao ngoài banner[cite: 38] -->
+    <div class="banner-content">
+        <!-- Khối chứa nội dung[cite: 38] -->
+        <p>Equipment you need</p> <!-- Đoạn mô tả[cite: 38] -->
+        <h2>For your new<br />office</h2> <!-- Tiêu đề lớn[cite: 38] -->
+        <a href="#latest" class="btn-banner">READ MORE</a> <!-- Nút bấm[cite: 38] -->
+    </div>
+</section>
+
+<div class="container">
+    <!-- KHU VỰC LƯỚI CATEGORY ĐẶC TRƯNG MẪU 1 -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="cat-box cat-blue">Paper & Mailing ></div>
+        </div>
+        <div class="col-md-6">
+            <div class="cat-box cat-yellow">Furniture ></div>
+        </div>
+        <div class="col-md-3">
+            <div class="cat-box cat-dark">Organization ></div>
+        </div>
+        <div class="col-md-3 offset-md-3">
+            <div class="cat-box cat-orange">Writing ></div>
+        </div>
+        <div class="col-md-3">
+            <div class="cat-box cat-blue">Cleaning ></div>
+        </div>
+    </div>
+
+    <!-- KHU VỰC SẢN PHẨM NỔI BẬT -->
+    <section class="featured-products" id="latest">
+        <!-- Phần sản phẩm nổi bật[cite: 41] -->
+        <h2>Latest products</h2> <!-- Tiêu đề[cite: 41] -->
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-4">
+            @foreach (var item in Model.NewProducts)
+            {
+                <div class="col">
+                    <!-- Nội dung thẻ sản phẩm giữ nguyên như cũ của bạn -->
+                    <div class="product-card h-100">
+                        <a href="@Url.Action("Details", "Products", new { id = item.ProductID, area = "" })" class="text-decoration-none">
+                            <img src="@item.ProductImage" alt="@item.ProductName" style="width: 100%; height: 200px; object-fit: contain; margin-bottom: 15px;" onerror="this.src='https://via.placeholder.com/200?text=No+Image'" />
+                        </a>
+                        <h3 class="product-title" title="@item.ProductName">@item.ProductName</h3>
+                        <p class="product-price">@String.Format("{0:N0}", item.ProductPrice) VNĐ</p>
+                        <a href="@Url.Action("AddToCart", "Cart", new { id = item.ProductID, area = "" })" class="btn btn-sm btn-outline-secondary w-100">
+                            <i class="fa fa-shopping-cart"></i> Add to Cart
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- Hiển thị phân trang -->
+        <div class="d-flex justify-content-center mt-4">
+            @Html.PagedListPager(Model.NewProducts, page => Url.Action("Index", new { page, searchTerm = Model.SearchTerm }),
+                     new PagedListRenderOptions
+                     {
+                         LiElementClasses = new string[] { "page-item" },
+                         // Dùng class page-link cho các thẻ a bên trong
+                         FunctionToTransformEachPageLink = (liTag, aTag) =>
+                         {
+                             aTag.Attributes.Add("class", "page-link");
+                             liTag.InnerHtml = aTag.ToString();
+                             return liTag;
+                         }
+                     }
+                 )
+        </div>
+    </section>
+</div>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<_25DH110463_LTW.Models.Order>
+
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold text-primary"><i class="fa fa-tasks"></i> QUẢN LÝ ĐƠN HÀNG (ADMIN)</h3>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover table-bordered mb-0">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Mã ĐH</th>
+                        <th>Ngày Đặt</th>
+                        <th>Khách Hàng</th>
+                        <th>Thanh Toán</th>
+                        <th>Giao Hàng</th>
+                        <th>Tổng Tiền</th>
+                        <th>Trạng Thái</th>
+                        <th>Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center fw-bold text-primary">#@item.OrderID</td>
+                            <td class="text-center">@String.Format("{0:dd/MM/yyyy HH:mm}", item.OrderDate)</td>
+
+                            <!-- Lấy tên khách hàng từ bảng Customer dựa vào CustomerID -->
+                            <td>@item.Customer.CustomerName</td>
+
+                            <td class="text-center">
+                                @if (item.PaymentMethod == "Paypal")
+                                {
+                                    <span class="badge bg-primary"><i class="fab fa-paypal"></i> PayPal</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary"><i class="fa fa-money-bill"></i> Tiền mặt</span>
+                                }
+                            </td>
+
+                            <td class="text-center">@item.DeliveryMethod</td>
+                            <td class="text-end fw-bold text-danger">@String.Format("{0:N0} VNĐ", item.TotalAmount)</td>
+
+                            <td class="text-center">
+                                @if (item.PaymentStatus == "Pending" || item.PaymentStatus == "Chờ thanh toán")
+                                {
+                                    <span class="badge bg-warning text-dark">Chờ xử lý</span>
+                                }
+                                else if (item.PaymentStatus == "Processing" || item.PaymentStatus == "Đang xử lý")
+                                {
+                                    <span class="badge bg-info text-dark">Đang xử lý</span>
+                                }
+                                else if (item.PaymentStatus == "Shipped" || item.PaymentStatus == "Đang vận chuyển")
+                                {
+                                    <span class="badge bg-primary">Đang vận chuyển</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Đã giao hàng</span>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <a href="@Url.Action("UpdateStatus", "AdminOrder", new { id = item.OrderID })" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-edit"></i> Xử lý
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
